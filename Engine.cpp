@@ -3,21 +3,19 @@
 #include <iostream>
 #include <Windows.h>
 
-struct Position // 새로운 자료형 -> custom data type
-{
-	int X;
-	int Y;
+//custom data type
 
-};
 
-Position PlayerPosition;
+FVector2i PlayerPosition = {1, 1};
+
 
 int PlayerX = 1;
 int PlayerY = 1;
-int PlayerHP = 100;
+
+
+int PalyerHP = 100;
 int PlayerItem[10];
 int PlayerGold = 100;
-
 
 int Map[10][10] =
 {
@@ -35,6 +33,12 @@ int Map[10][10] =
 
 int Input()
 {
+	//if (_kbhit())
+	//{
+
+	//	_getch();
+	//}
+
 	return _getch();
 }
 
@@ -58,29 +62,20 @@ void Tick(int KeyCode)
 	}
 }
 
-void Gotoxy(int x, int y)
-{
-	COORD Pos = { (SHORT)x, (SHORT)y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
-}
-
 void Clear()
 {
 	for (int Y = 0; Y < 10; ++Y)
 	{
-		for (int X = 0; X < 10; ++X)
-		{
-			Gotoxy(X, Y);
-			std::cout << " ";
-		}
+		Gotoxy(1, Y);
+		std::cout << "           ";
 	}
 
 }
 
 void AddPlayerOffset(int DeltaX, int DeltaY)
 {
-	PlayerX += DeltaX;
-	PlayerY += DeltaY;
+	PlayerPosition.X += DeltaX;
+	PlayerPosition.Y += DeltaY;
 }
 
 void Render()
@@ -92,25 +87,27 @@ void Render()
 		for (int X = 0; X < 10; ++X)
 		{
 			Gotoxy(X, Y);
-			std::cout << Map[Y][X];
 
-			if (PlayerX == X && PlayerY == Y)
+			if (PlayerPosition.X == X && PlayerPosition.Y == Y)
 			{
 				std::cout << "P";
 			}
-
 			else if (Map[Y][X] == 1)
 			{
 				std::cout << "#";
 			}
-
 			else if (Map[Y][X] == 0)
 			{
 				std::cout << " ";
 			}
+
 		}
 	}
-
 }
 
 
+void Gotoxy(int x, int y)
+{
+	COORD Pos = { (SHORT)x, (SHORT)y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}

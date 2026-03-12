@@ -1,19 +1,58 @@
-﻿#include "Engine.h"
-
+﻿#include <iostream>
+#include "Engine.h"
 
 using namespace std;
 
-struct Color
+struct InnerType
 {
-	int R;
-	int G;
-	int B;
 	int A;
+	int B;
+};
+
+struct CustomDataType
+{
+	int A;
+	int B;
+	float C;
+	bool D;
+	InnerType Inner;
+};
+
+class AActor
+{
+public:
+
+	int X;
+	int Y;
+	
+	void Add()
+	{
+
+	}
+
+	void Move()
+	{
+		this->Add();
+	}
 };
 
 int main()
 {
-	Color PlayerColor;
+	CustomDataType Data;
+	CustomDataType* P = &Data;
+	Data.A = 1;
+	std::cout << (*P).A; // 불편
+	std::cout << P->A; // 옳바른 표현
+	AActor* Player = nullptr;
+
+	Player = new AActor();
+
+	Player->Move();
+
+	delete Player;
+	Player = nullptr;
+
+	return 0;
 
 	bool bIsRunning = true;
 

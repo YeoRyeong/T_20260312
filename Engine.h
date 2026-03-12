@@ -8,14 +8,17 @@ extern int Map[10][10];
 extern int PlayerX;
 extern int PlayerY;
 
-struct Position // 새로운 자료형 -> custom data type
+/// <summary>
+/// public class
+/// </summary>
+/// 언리얼 구조에서 F가 들어감. // i가 있기 때문에
+struct FVector2i 
 {
 	int X;
 	int Y;
+};
 
-}; // C++
-
-extern Position PlayerPosition; // 다른 곳에서 부를 것이라는 것을 선언해줌.
+extern FVector2i PlayerPosition;
 
 int Input();
 
@@ -28,5 +31,6 @@ void Gotoxy(int x, int y);
 void Clear();
 
 void AddPlayerOffset(int DeltaX, int DeltaY);
+
 
 #endif //__ENGINE_H__
