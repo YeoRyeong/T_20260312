@@ -1,12 +1,20 @@
-﻿#include <iostream>
-#include "Engine.h"
+﻿#include "Engine.h"
 
 
 using namespace std;
 
+struct Color
+{
+	int R;
+	int G;
+	int B;
+	int A;
+};
 
 int main()
 {
+	Color PlayerColor;
+
 	bool bIsRunning = true;
 
 	//Gameloop
